@@ -1,9 +1,9 @@
-## DOTNET API - VirtualMind
+## DOTNET - VirtualMind
 
-* Database creation script can be found in ./Scripts/db.sql
-* You should change the connection string in appsettings.json to match your configuration
+* Database creation script can be found in ./scripts/db.sql
+* You should change the connection string in ./api/appsettings.json to match your configuration
 
-## Available endpoints are:
+## API - Available endpoints are:
 
 #### Get a specific currency rate
 * **[GET]** /api/currency/{ISO} 
