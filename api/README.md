@@ -1,25 +1,16 @@
----
-languages:
-- csharp
-- aspx-csharp
-page_type: sample
-description: "This is a sample application that you can use to follow along with the Run a RESTful API with CORS in Azure App Service tutorial."
-products:
-- azure
-- aspnet-core
-- azure-app-service
----
+## DOTNET API - VirtualMind
 
-# ASP.NET Core API sample for Azure App Service
+* Database creation script can be found in ./Scripts/db.sql
+* You should change the connection string in appsettings.json to match your configuration
 
-This is a sample application that you can use to follow along with the tutorial at 
-[Run a RESTful API with CORS in Azure App Service](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api). 
+## Available endpoints are:
 
-## License
+#### Get a specific currency rate
+* **[GET]** /api/currency/{ISO} 
+* **Sample:** /api/currency/usd
+* **Headers:** { "Content-Type", "application/json" }
 
-See [LICENSE](https://github.com/Azure-Samples/dotnet-core-api/blob/master/LICENSE.md).
-
-## Contributing
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-  
+#### Create new transaction
+* **[POST]** /api/transaction 
+* **Body:** { "userId": 1, "Amount": 1, "CurrencyCode": "USD" }
+* **Headers:** { "Content-Type", "application/json" }
