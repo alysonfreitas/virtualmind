@@ -1,0 +1,49 @@
+USE master
+GO
+CREATE DATABASE CurrencyDB;
+GO
+
+USE CurrencyDB
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [Name] [varchar](150) NOT NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Transaction](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [Amount] [decimal](18, 4) NOT NULL,
+    [AmountPurchased] [decimal](18, 4) NOT NULL,
+    [CurrencyCode] [varchar](5) NOT NULL,
+    [CreatedAt] [datetime] NOT NULL,
+    [UserId] [int] NOT NULL,
+ CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_User] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([Id])
+GO
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_User]
+GO
+
+INSERT INTO [dbo].[User] (NAME) VALUES ('Alyson');
+INSERT INTO [dbo].[User] (NAME) VALUES ('Peter');
+INSERT INTO [dbo].[User] (NAME) VALUES ('Victor');
