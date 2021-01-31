@@ -2,6 +2,7 @@
 
 * Database creation script can be found in ./scripts/db.sql
 * You should change the connection string in ./api/appsettings.json to match your configuration
+* To run the app, you must install the npm packages
 
 ## API - Available endpoints are:
 
