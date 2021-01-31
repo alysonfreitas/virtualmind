@@ -11,6 +11,7 @@ namespace API.Repositories
     {
         public abstract Task<CurrencyModel> GetCurrency();
         public abstract string GetISO();
+        public abstract string GetName();
         public abstract decimal GetPurchaseLimit();
         public static CurrencyRepository GetCurrencyRepositoryByISO(string iso)
         {

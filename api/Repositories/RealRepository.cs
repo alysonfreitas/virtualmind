@@ -17,13 +17,18 @@ namespace API.Repositories
             // parsing
             string[] items = JsonConvert.DeserializeObject<string[]>(response.Content);
             // returning
-            CurrencyModel currency = new CurrencyModel(Convert.ToDecimal(items[0]) / 4, Convert.ToDecimal(items[1]) / 4, this.GetISO());
+            CurrencyModel currency = new CurrencyModel(Convert.ToDecimal(items[0]) / 4, Convert.ToDecimal(items[1]) / 4, this.GetISO(), this.GetName());
             return currency;
         }
 
         public override string GetISO()
         {
             return "BRL";
+        }
+
+        public override string GetName()
+        {
+            return "Real";
         }
 
         public override decimal GetPurchaseLimit()
