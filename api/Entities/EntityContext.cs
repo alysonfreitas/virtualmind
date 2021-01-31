@@ -1,5 +1,3 @@
-using API.Entities;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Entities

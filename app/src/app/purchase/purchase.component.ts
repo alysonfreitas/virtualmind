@@ -59,6 +59,11 @@ export class PurchaseComponent implements OnInit {
         title: 'Success',
         text: `You have just purchased ${transaction.amountPurchased} ${transaction.currencyCode}!`
       });
+      this.form = {
+        userId: null,
+        currencyCode: null,
+        amount: '0',
+      };
     }, response => {
       this.loading = false;
       console.error(response.error);
