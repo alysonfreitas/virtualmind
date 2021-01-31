@@ -1,13 +1,21 @@
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+<div [hidden]="isComponent" class="pricing-header py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <h1 class="display-4">Quotes</h1>
-  <p class="lead">Preview exchange rate of the currencies using our previous developed API</p>
+  <p class="lead">Preview exchange rate of the currencies using our API</p>
   <div class="d-flex flex-column align-items-center justify-content-center w-100">
     <button class="w-50 btn btn-primary btn-lg spinner" [disabled]="loading" (click)="fetchCurrencies()" type="submit">
       {{loading ? '' : 'Refresh'}}
     </button>
   </div>
 </div>
-<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+<div [hidden]="!isComponent" class="pricing-header pb-md-4 mx-auto text-left">
+  <h4>Quotes</h4>
+  <div class="d-flex flex-column align-items-center justify-content-center w-100">
+    <button class="w-100 btn btn-primary btn-lg spinner" [disabled]="loading" (click)="fetchCurrencies()" type="submit">
+      {{loading ? '' : 'Refresh'}}
+    </button>
+  </div>
+</div>
+<div class="row row-cols-1 {{isComponent ? '': 'row-cols-md-3'}} mb-3 text-center">
   <div class="col" *ngFor="let currency of currencies">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
@@ -17,11 +25,11 @@
         <ul class="list-unstyled mt-2 mb-4">
           <li><strong>Currency Code (ISO): </strong>{{currency.iso}}</li>
           <li>
-            <strong>Sale price: </strong>
+            <strong>Sale Price: </strong>
             <span>{{currency.iso}} {{currency.salePrice | number:'1.2-2'}}</span>
           </li>
           <li>
-            <strong>Purchase price: </strong>
+            <strong>Purchase Price: </strong>
             <span>{{currency.iso}} {{currency.purchasePrice | number:'1.2-2'}}</span>
           </li>
         </ul>

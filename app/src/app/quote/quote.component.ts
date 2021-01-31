@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import Swal from 'sweetalert2'
 
@@ -8,6 +8,8 @@ import Swal from 'sweetalert2'
   styleUrls: ['./quote.component.scss']
 })
 export class QuoteComponent implements OnInit {
+  @Input()
+  public isComponent: boolean = false;
 
   public isos = ["USD", "BRL"];
   public currencies: any[] = [];

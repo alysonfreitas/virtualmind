@@ -3,32 +3,33 @@
   <p class="lead">Register a transaction using our previous developed API</p>
 </div>
 <div class="row g-3">
-  <div class="d-flex flex-column align-items-center justify-content-center w-100">
-    <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Purchase</h4>
-      <div class="row g-3">
-        <div class="col-sm-6">
-          <label for="user" class="form-label">User</label>
-          <input type="text" class="form-control" id="user" mask="9" [(ngModel)]="form.userId">
-        </div>
-        <div class="col-sm-6">
-          <label for="currency" class="form-label">Currency Code</label>
-          <input type="text" class="form-control" id="currency" [(ngModel)]="form.currencyCode"
-            oninput="this.value = this.value.toUpperCase()" mask="A{3}">
-        </div>
-        <div class="col-12 mt-2">
-          <label for="amount" class="form-label">Amount</label>
-          <div class="input-group">
-            <span class="input-group-text">ARS</span>
-            <input type="text" class="form-control" id="amount" currencyMask
-              [options]="{ prefix: '$ ', thousands: '.', decimal: ',' }" [(ngModel)]="form.amount">
-          </div>
+  <div class="col-md-5 col-lg-4 order-md-last">
+    <app-quote [isComponent]="true"></app-quote>
+  </div>
+  <div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Purchase</h4>
+    <div class="row g-3">
+      <div class="col-sm-6">
+        <label for="user" class="form-label">User</label>
+        <input type="text" class="form-control" id="user" mask="9" [(ngModel)]="form.userId">
+      </div>
+      <div class="col-sm-6">
+        <label for="currency" class="form-label">Currency Code</label>
+        <input type="text" class="form-control" id="currency" [(ngModel)]="form.currencyCode"
+          oninput="this.value = this.value.toUpperCase()" mask="A{3}">
+      </div>
+      <div class="col-12 mt-2">
+        <label for="amount" class="form-label">Amount</label>
+        <div class="input-group">
+          <span class="input-group-text">ARS</span>
+          <input type="text" class="form-control" id="amount" currencyMask
+            [options]="{ prefix: '$ ', thousands: '.', decimal: ',' }" [(ngModel)]="form.amount">
         </div>
       </div>
-      <hr class="my-4">
-      <button class="w-100 btn btn-primary btn-lg spinner" [disabled]="loading" (click)="purchase()" type="submit">
-        {{loading ? '' : 'Purchase'}}
-      </button>
     </div>
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg spinner" [disabled]="loading" (click)="purchase()" type="submit">
+      {{loading ? '' : 'Purchase'}}
+    </button>
   </div>
 </div>
