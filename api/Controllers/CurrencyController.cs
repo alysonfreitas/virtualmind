@@ -31,7 +31,14 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status501NotImplemented, new ErrorModel(_logger, "Sorry, the currency specified is not implemented yet."));
             }
 
-            return await currencyRepository.GetCurrency();
+            CurrencyModel currencyModel = await currencyRepository.GetCurrency();
+
+            if (currencyModel == null)
+            {
+                return StatusCode(StatusCodes.Status501NotImplemented, new ErrorModel(_logger, "Sorry, the currency specified is unavailable."));
+            }
+
+            return currencyModel;
         }
     }
 }

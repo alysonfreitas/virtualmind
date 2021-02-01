@@ -49,7 +49,12 @@ namespace API.Controllers
             }
 
             // get selected currency
-            CurrencyModel currency = await currencyRepository.GetCurrency();
+            CurrencyModel currencyModel = await currencyRepository.GetCurrency();
+
+            if (currencyModel == null)
+            {
+                return StatusCode(StatusCodes.Status501NotImplemented, new ErrorModel(_logger, "Sorry, the currency specified is unavailable."));
+            }
 
             // find user
             UserEntity user = this._context.Users.AsNoTracking().Include(u => u.Transactions)
@@ -60,11 +65,11 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ErrorModel(_logger, "User not found."));
             }
 
-            decimal currentAmountPurchased = transaction.Amount / currency.PurchasePrice;
+            decimal currentAmountPurchased = transaction.Amount / currencyModel.PurchasePrice;
             DateTime lastMonth = DateTime.Now.AddMonths(-1);
             decimal userTotalPurchasesFromLastMonth = user.Transactions
                 .Where(t => t.CreatedAt >= lastMonth)
-                .Where(t => t.CurrencyCode == currency.ISO)
+                .Where(t => t.CurrencyCode == currencyModel.ISO)
                 .Sum(t => t.AmountPurchased);
 
             if ((userTotalPurchasesFromLastMonth + currentAmountPurchased) >= currencyRepository.GetPurchaseLimit())
@@ -75,7 +80,7 @@ namespace API.Controllers
             TransactionEntity trans = new TransactionEntity();
             trans.Amount = transaction.Amount;
             trans.AmountPurchased = currentAmountPurchased;
-            trans.CurrencyCode = currency.ISO;
+            trans.CurrencyCode = currencyModel.ISO;
             trans.CreatedAt = DateTime.Now;
             trans.UserId = transaction.UserId;
 
